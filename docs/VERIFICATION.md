@@ -9,9 +9,9 @@ Evaluation date: 2026-09-18. These results validate the implemented subset, not 
 | TypeScript | Pass: `npm run typecheck` |
 | Browser bundles | Pass: `npm run build` |
 | Shared conditions/arithmetic and tree operations | 25 tests passed: `npm test` |
-| PHP validation and calculation authority | 31 checks passed: `npm run test:php` |
+| PHP validation, reCAPTCHA token removal and calculation authority | 33 checks passed: `npm run test:php` |
 | PHP syntax | Pass: `npm run lint:php` |
-| WordPress/MySQL capabilities, encryption, savepoints and callback isolation | 18 checks passed: `node scripts/wordpress.mjs tests/wp/security.php` |
+| WordPress/MySQL capabilities, encrypted reCAPTCHA settings, savepoints and callback isolation | 22 checks passed: `node scripts/wordpress.mjs tests/wp/security.php` |
 | Import idempotency, privacy and persistent queue failures | 13 checks passed: `node scripts/wordpress.mjs tests/wp/data.php` |
 | WordPress 6.9.1 / PHP 8.2.27 / MySQL 8.0.35 | 19 browser tests passed together, plus the added expired-upload-session test passed separately |
 | WordPress 6.6 / PHP 8.2.27 / MySQL 8.0.35 | Nine core browser scenarios passed; one WordPress login-focus race was fixed in the test helper and the affected import test reran successfully |
@@ -21,6 +21,8 @@ Evaluation date: 2026-09-18. These results validate the implemented subset, not 
 | Composer audit | No advisories reported |
 
 The 20 browser scenarios cover builder creation/publication, public storage, server recalculation and hidden-field pruning, malicious choices, idempotency, private resume tokens, stale revision rejection, approval gating, nested repeaters, protected downloads, entry history and PDFs, native popup behavior, Gutenberg appearance overrides, keyboard multi-step completion and automated WCAG AA checks on a mobile public form. GitPress tests cover Theme Wrapped, Full Canvas, managed layouts, stale fragments and independent multiple instances with expired-session renewal. MCP tests use a restricted WordPress account and real application-password authentication.
+
+A separate live browser check used Google's published reCAPTCHA v2 test keys on the isolated WordPress/MySQL site. It verified the builder field and theme/size controls, encrypted Global Settings state, explicit frontend widget rendering, checkbox completion, Google server verification, successful submission, and absence of the response token from the stored entry. An axe WCAG A/AA scan scoped to the public form reported zero violations; it left the alert color inside Google's cross-origin iframe for manual review. The keys are restricted to the disposable test environment and intentionally display Google's test-key warning.
 
 The minimum-version site has no Fluent Forms or GitPress installed. The current Playground site also runs this plugin independently. The main isolated site uses the supplied GitPress plugin and temporarily installed Fluent Forms only for reference UI capture. No source edits were made to either supplied plugin. Fluent Forms was then deactivated in the main isolated site and the builder/submission flow passed again.
 

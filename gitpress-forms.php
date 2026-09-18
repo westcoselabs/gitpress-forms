@@ -2,7 +2,7 @@
 /**
  * Plugin Name: GitPress Forms
  * Description: Independent forms, submissions, and workflows for WordPress and GitPress.
- * Version: 0.1.0-dev
+ * Version: 0.1.1-dev
  * Requires at least: 6.6
  * Requires PHP: 8.2
  * Author: WestCose Labs
@@ -10,7 +10,7 @@
  * Text Domain: gitpress-forms
  */
 defined('ABSPATH') || exit;
-define('GPF_VERSION', '0.1.0-dev');
+define('GPF_VERSION', '0.1.1-dev');
 define('GPF_DIR', __DIR__ . '/');
 define('GPF_URL', plugin_dir_url(__FILE__));
 if (is_file(GPF_DIR . 'vendor/autoload.php')) { require_once GPF_DIR . 'vendor/autoload.php'; }

@@ -41,3 +41,7 @@
 @media(min-width:1500px) { .gpf-admin .palette-grid { grid-template-columns:1fr 1fr; } }
 @media(max-width:950px) and (min-width:681px) { .gpf-admin .builder-workspace { grid-template-columns:minmax(0,1fr) 300px; } .gpf-admin .sidebar-tabs button { font-size:11px; } }
 @media(max-width:680px) { .gpf-admin .builder-workspace { display:flex; height:auto; } .gpf-admin .palette-grid { grid-template-columns:1fr 1fr; } }
+.gpf-admin .preview-recaptcha { width:270px; max-width:100%; min-height:66px; border:1px solid #d6d6d6; border-radius:3px; background:#fafafa; display:flex; align-items:center; gap:11px; padding:9px 12px; color:#343434; }
+.gpf-admin .preview-recaptcha > span { width:24px; height:24px; border:2px solid #707070; display:grid; place-items:center; color:#4f8d35; font-size:0; }
+.gpf-admin .preview-recaptcha > strong { font-size:12px; font-weight:400; }
+.gpf-admin .preview-recaptcha > small { margin-left:auto; font-size:9px; color:#777; }

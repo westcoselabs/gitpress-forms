@@ -5,6 +5,7 @@ export function FieldPreview({ field }: { field: Field }) {
   if (type === 'section') return <div className="field-preview"><h3>{label}</h3><p>{field.help}</p></div>;
   if (type === 'html') return <div className="field-preview"><span className="field-preview-code">HTML</span><p>{field.html ? field.html.replace(/<[^>]*>/g, '') : 'Add custom content in Input Customization'}</p></div>;
   if (type === 'hidden') return <div className="field-preview"><span className="field-preview-code">HIDDEN</span> {label}</div>;
+  if (type === 'recaptcha') return <div className="field-preview">{heading}<div className="preview-recaptcha"><span>✓</span><strong>I'm not a robot</strong><small>reCAPTCHA</small></div></div>;
   if (['radio', 'checkbox'].includes(type)) return <div className="field-preview">{heading}<div className="preview-options">{field.options.map((o, i) => <label key={i}><input disabled type={type} /> {o.label}</label>)}</div></div>;
   if (['terms', 'gdpr'].includes(type)) return <div className="field-preview">{heading}<label className="preview-choice"><input disabled type="checkbox" />{field.help || 'I agree to the terms and conditions'}</label></div>;
   if (type === 'ranking') return <div className="field-preview">{heading}<ol className="preview-ranking">{field.options.map(o => <li key={o.value}>{o.label}</li>)}</ol></div>;

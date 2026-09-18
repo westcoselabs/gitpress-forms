@@ -40,6 +40,12 @@ final class Definition
                         if (is_wp_error($valid)) { throw new \InvalidArgumentException('Invalid extension setting: ' . $key); }
                         $clean['extension'][$key] = rest_sanitize_value_from_schema($value, $schema);
                     }
+                } elseif ($clean['type'] === 'recaptcha') {
+                    $clean['required'] = true;
+                    $clean['extension'] = [
+                        'theme' => ($field['extension']['theme'] ?? '') === 'dark' ? 'dark' : 'light',
+                        'size' => ($field['extension']['size'] ?? '') === 'compact' ? 'compact' : 'normal',
+                    ];
                 }
                 if (!empty($field['condition'])) { $clean['condition'] = self::rule($field['condition']); }
                 foreach (['min', 'max'] as $key) { if (isset($field[$key]) && is_numeric($field[$key])) { $clean[$key] = (float) $field[$key]; } }

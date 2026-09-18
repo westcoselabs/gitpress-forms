@@ -132,6 +132,16 @@
     "container": false
   },
   {
+    "type": "recaptcha",
+    "label": "Google reCAPTCHA",
+    "group": "Advanced",
+    "container": false,
+    "settingsSchema": {
+      "theme": { "type": "string", "title": "Theme", "default": "light", "enum": ["light", "dark"] },
+      "size": { "type": "string", "title": "Size", "default": "normal", "enum": ["normal", "compact"] }
+    }
+  },
+  {
     "type": "rating",
     "label": "Ratings",
     "group": "Advanced",

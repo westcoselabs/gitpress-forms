@@ -12,7 +12,7 @@ foreach (['forms', 'revisions', 'entry_revisions', 'entries', 'files', 'feeds', 
     $table = $wpdb->prefix . 'gitpress_forms_' . $suffix;
     $wpdb->query("DROP TABLE IF EXISTS `$table`");
 }
-foreach (['gitpress_forms_schema', 'gitpress_forms_settings', 'gitpress_forms_connections', 'gitpress_forms_delete_on_uninstall'] as $option) { delete_option($option); }
+foreach (['gitpress_forms_schema', 'gitpress_forms_settings', 'gitpress_forms_connections', 'gitpress_forms_delete_on_uninstall', 'gitpress_forms_recaptcha_site_key', 'gitpress_forms_recaptcha_secret'] as $option) { delete_option($option); }
 foreach (array_keys(wp_roles()->roles) as $name) {
     $role = get_role($name);
     foreach (['manage_gitpress_forms', 'view_gitpress_entries', 'manage_gitpress_entries', 'manage_gitpress_integrations'] as $cap) { $role?->remove_cap($cap); }

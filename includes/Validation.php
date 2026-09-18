@@ -6,7 +6,7 @@ final class Validation
     public static function withoutPasswords(array $fields, array $values): array
     {
         foreach ($fields as $field) {
-            if ($field['type'] === 'password') { unset($values[$field['name']]); }
+            if (in_array($field['type'], ['password', 'recaptcha'], true)) { unset($values[$field['name']]); }
             elseif ($field['type'] === 'repeat') { foreach ($values[$field['name']] ?? [] as $i => $row) { $values[$field['name']][$i] = self::withoutPasswords($field['children'], $row); } }
             elseif (!empty($field['children'])) { $values = self::withoutPasswords($field['children'], $values); }
         }

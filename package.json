@@ -1,6 +1,6 @@
 {
   "name": "gitpress-forms",
-  "version": "0.1.0-dev",
+  "version": "0.1.1-dev",
   "private": true,
   "type": "module",
   "description": "Independent WordPress form builder for the GitPress ecosystem.",

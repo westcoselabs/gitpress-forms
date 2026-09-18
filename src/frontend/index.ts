@@ -4,7 +4,27 @@ import type { Field } from '../shared/types';
 
 type Config = { id: number; api: string; instance: string; sessionUrl: string; fields: Field[]; settings: { saveResume: boolean; trackPartial?: boolean; mode: string; submitLabel: string }; preview: boolean };
 type Values = Record<string, unknown>;
+type RecaptchaClient = { render: (container: HTMLElement, options: Record<string, unknown>) => number; reset: (widgetId?: number) => void };
 const escape = CSS.escape;
+let recaptchaLoader: Promise<RecaptchaClient> | null = null;
+function loadRecaptcha(): Promise<RecaptchaClient> {
+  const current = (window as unknown as { grecaptcha?: RecaptchaClient }).grecaptcha;
+  if (typeof current?.render === 'function') return Promise.resolve(current);
+  if (recaptchaLoader) return recaptchaLoader;
+  recaptchaLoader = new Promise((resolve, reject) => {
+    let attempts = 0;
+    const ready = () => {
+      const client = (window as unknown as { grecaptcha?: RecaptchaClient }).grecaptcha;
+      if (typeof client?.render === 'function') { resolve(client); return; }
+      if (++attempts < 200) { window.setTimeout(ready, 25); return; }
+      reject(new Error('Google reCAPTCHA did not initialize.'));
+    };
+    const existing = document.querySelector<HTMLScriptElement>('script[src*="recaptcha/api.js"]');
+    if (existing) { existing.addEventListener('error', () => reject(new Error('Google reCAPTCHA could not be loaded.')), { once: true }); ready(); return; }
+    const script = document.createElement('script'); script.src = 'https://www.google.com/recaptcha/api.js?render=explicit'; script.async = true; script.defer = true; script.dataset.gpfRecaptcha = 'true'; script.addEventListener('load', ready, { once: true }); script.addEventListener('error', () => reject(new Error('Google reCAPTCHA could not be loaded.')), { once: true }); document.head.appendChild(script);
+  });
+  return recaptchaLoader;
+}
 function boot(form: HTMLFormElement) {
   if (form.dataset.gpfReady) return;
   form.dataset.gpfReady = 'true';
@@ -101,6 +121,15 @@ function boot(form: HTMLFormElement) {
     const row = holder.content.firstElementChild as HTMLElement; target.appendChild(row); setup(row); return row;
   }
   function setup(scope: ParentNode) {
+    scope.querySelectorAll<HTMLElement>('.gpf-recaptcha').forEach(container => {
+      if (container.dataset.ready || !container.dataset.sitekey) return;
+      container.dataset.ready = 'pending';
+      const input = container.parentElement!.querySelector<HTMLInputElement>('input[type=hidden]')!;
+      loadRecaptcha().then(client => {
+        const widgetId = client.render(container, { sitekey: container.dataset.sitekey, theme: container.dataset.theme || 'light', size: container.dataset.size || 'normal', callback: (token: string) => { input.value = token; input.dispatchEvent(new Event('input', { bubbles: true })); }, 'expired-callback': () => { input.value = ''; }, 'error-callback': () => { input.value = ''; message('Google reCAPTCHA could not complete. Please retry.', true); } });
+        container.dataset.ready = 'true'; container.dataset.widgetId = String(widgetId);
+      }).catch(error => { container.dataset.ready = 'error'; message((error as Error).message, true); });
+    });
     scope.querySelectorAll<HTMLElement>('.gpf-ranking').forEach(list => {
       if (list.dataset.ready) return; list.dataset.ready = 'true'; let dragging: HTMLElement | null = null;
       list.addEventListener('dragstart', event => { dragging = (event.target as HTMLElement).closest('li'); if (dragging) event.dataTransfer?.setData('text/plain', dragging.dataset.value || ''); });
@@ -139,7 +168,7 @@ function boot(form: HTMLFormElement) {
       const parts = key.split('.'); let el = form.querySelector<HTMLElement>(`[data-field="${escape(parts[0])}"]`);
       for (let i = 1; i + 1 < parts.length; i += 2) el = el?.querySelectorAll<HTMLElement>(':scope > .gpf-repeat-rows > .gpf-repeat-row')[Number(parts[i])]?.querySelector(`[data-field="${escape(parts[i + 1])}"]`) || el;
       if (!el) continue; const label = el.querySelector<HTMLElement>('.gpf-field-error'); if (label) label.textContent = error;
-      const input = el.querySelector<HTMLElement>('input:not([type=hidden]),select,textarea:not([hidden]),[contenteditable=true]'); input?.setAttribute('aria-invalid', 'true');
+      const input = el.querySelector<HTMLElement>('input:not([type=hidden]),select,textarea:not([hidden]),[contenteditable=true],.gpf-recaptcha'); input?.setAttribute('aria-invalid', 'true');
       if (!first) { first = input; const stepIndex = steps().findIndex(item => item.contains(el)); if (stepIndex >= 0) { step = stepIndex; showStep(); } }
     }
     message('Please check the highlighted fields.', true); first?.focus();
@@ -198,7 +227,10 @@ function boot(form: HTMLFormElement) {
     submit.disabled = true; submit.textContent = 'Submitting…';
     try {
       const result = await api('submit', { values: collect(), idempotencyKey, resumeToken, source: location.href.split('?')[0], website: form.querySelector<HTMLInputElement>('[name=_gpf_website]')!.value });
-      if (result.errors) { showErrors(result.errors); return; }
+      if (result.errors) {
+        for (const key of Object.keys(result.errors)) { const fieldName = key.split('.').at(-1) || key; const field = flatten(config.fields).find(item => item.name === fieldName); if (field?.type === 'recaptcha') { form.querySelectorAll<HTMLElement>(`.gpf-field[data-field="${escape(fieldName)}"] .gpf-recaptcha`).forEach(container => { const widgetId = Number(container.dataset.widgetId); if (Number.isFinite(widgetId)) (window as unknown as { grecaptcha?: RecaptchaClient }).grecaptcha?.reset(widgetId); const input = container.parentElement?.querySelector<HTMLInputElement>('input[type=hidden]'); if (input) input.value = ''; }); } }
+        showErrors(result.errors); return;
+      }
       message(result.message); if (result.redirect) { location.assign(result.redirect); return; }
       if (result.entryView) { const link = document.createElement('a'); link.href = result.entryView; link.textContent = 'View your submission'; alert.append(' ', link); }
       form.querySelector<HTMLElement>('.gpf-fields')!.hidden = true; form.querySelector<HTMLElement>('.gpf-actions')!.hidden = true;

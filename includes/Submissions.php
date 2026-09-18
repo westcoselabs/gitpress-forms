@@ -26,9 +26,11 @@ final class Submissions
         if ($existing) { return self::confirmation(Repository::entry((int) $existing), $form); }
         $validation = Validation::values($form['definition']['fields'], is_array($payload['values'] ?? null) ? $payload['values'] : []);
         if ($validation['errors']) { return ['errors' => $validation['errors']]; }
-        if (!$validation['values'] || !array_filter($validation['values'], static fn ($v) => $v !== '' && $v !== [])) { throw new \InvalidArgumentException('Please complete the form before submitting.'); }
-        // Passwords are never stored as form entries or in background job payloads.
+        $recaptchaErrors = Recaptcha::verify($form['definition']['fields'], $validation['values'], $id);
+        if ($recaptchaErrors) { return ['errors' => $recaptchaErrors]; }
+        // Passwords and one-time anti-abuse tokens are never stored in entries or job payloads.
         $validation['values'] = Validation::withoutPasswords($form['definition']['fields'], $validation['values']);
+        if (!$validation['values'] || !array_filter($validation['values'], static fn ($v) => $v !== '' && $v !== [])) { throw new \InvalidArgumentException('Please complete the form before submitting.'); }
         $entry = Database::transaction(static function () use ($wpdb, $id, $form, $s, $validation, $payload, $key) {
             // Serializes the entry-limit and uniqueness checks for this form on MySQL.
             $wpdb->get_var($wpdb->prepare('SELECT id FROM ' . Database::table('forms') . ' WHERE id=%d FOR UPDATE', $id));

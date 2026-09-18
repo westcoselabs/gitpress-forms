@@ -2,7 +2,7 @@
 
 Independent WordPress form builder for the GitPress ecosystem. Original PHP and React/TypeScript implementation; Fluent Forms is not a runtime dependency. There are no subscription checks, feature entitlements, site limits, hosted GitPress dependency, or plugin transaction fees.
 
-**Version 0.1.0-dev is a development preview. It is not the complete Fluent Forms parity release described in the product plan.** Payments are not implemented. Native integration coverage and live account verification are incomplete. Review [current coverage](docs/STATUS.md) and the [release checklist](docs/ACCEPTANCE.md) before evaluation. This build has not been approved for client production use.
+**Version 0.1.1-dev is a development preview. It is not the complete Fluent Forms parity release described in the product plan.** Payments are not implemented. Native integration coverage and live account verification are incomplete. Review [current coverage](docs/STATUS.md) and the [release checklist](docs/ACCEPTANCE.md) before evaluation. This build has not been approved for client production use.
 
 ## Requirements
 
@@ -22,6 +22,12 @@ Download the `gitpress-forms.zip` asset from the GitHub release. Do not upload G
 5. For a popup, use `[gitpress_form id="123" popup="Contact us"]`.
 
 GitPress can render the same shortcode inside its HTML fragments. GitPress remains optional and needs no source changes. Form definitions, entries and workflows belong to WordPress; they are not synchronized to GitHub.
+
+## Google reCAPTCHA
+
+GitPress Forms supports the Google reCAPTCHA v2 Checkbox field. Create keys for the website's domain in the Google reCAPTCHA Admin Console, then open GitPress Forms → Global Settings and save the site key and secret key. In the builder, add **Google reCAPTCHA** from Advanced Fields and choose its light/dark theme and normal/compact size.
+
+The site key is public. The secret is encrypted in WordPress and is never returned by the management API or sent to the browser. Every response is verified with Google on the server before the entry is accepted, and the one-time response token is removed before entries, partial entries, and jobs are stored.
 
 ## Reproducible build
 

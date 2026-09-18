@@ -33,8 +33,8 @@ final class RestApi
         self::route('/feeds/(?P<id>\d+)', 'PUT', static function ($r) { global $wpdb; $formId = (int) $wpdb->get_var($wpdb->prepare('SELECT form_id FROM ' . Database::table('feeds') . ' WHERE id=%d', (int) $r['id'])); if (!$formId) { throw new \RuntimeException('Feed not found.', 404); } return Integrations::saveFeed($formId, self::body($r), (int) $r['id']); }, 'manage_gitpress_integrations');
         self::route('/import/preview', 'POST', static fn ($r) => Importer::preview(self::body($r)));
         self::route('/import', 'POST', static fn ($r) => Importer::run(self::body($r)));
-        self::route('/settings', 'GET', static fn () => ['deleteOnUninstall' => get_option('gitpress_forms_delete_on_uninstall') === 'yes', 'adminEmail' => get_option('admin_email')]);
-        self::route('/settings', 'PUT', static function ($r) { update_option('gitpress_forms_delete_on_uninstall', !empty(self::body($r)['deleteOnUninstall']) ? 'yes' : 'no'); return ['success' => true]; }, 'manage_options');
+        self::route('/settings', 'GET', static fn () => array_merge(['deleteOnUninstall' => get_option('gitpress_forms_delete_on_uninstall') === 'yes', 'adminEmail' => get_option('admin_email')], Recaptcha::settings()));
+        self::route('/settings', 'PUT', static function ($r) { $body = self::body($r); update_option('gitpress_forms_delete_on_uninstall', !empty($body['deleteOnUninstall']) ? 'yes' : 'no'); return ['success' => true] + Recaptcha::save($body); }, 'manage_options');
         self::route('/permissions', 'GET', static fn () => Permissions::roles(), 'manage_options');
         self::route('/permissions', 'PUT', static fn ($r) => Permissions::saveRoles(self::body($r)), 'manage_options');
         self::route('/users', 'GET', static fn () => array_map(static fn ($u) => ['id' => $u->ID, 'name' => $u->display_name], get_users(['number' => 1000, 'fields' => ['ID', 'display_name']])), 'manage_options');

@@ -5,6 +5,7 @@ dist/
 .runtime/
 test-results/
 playwright-report/
+graphify-out/
 .env*
 !.env.example
 *.tsbuildinfo

@@ -74,7 +74,14 @@ final class Renderer
             $default = $field['default'];
             if (preg_match('/^\{query:([a-zA-Z0-9_-]+)\}$/', $default, $m)) { $default = isset($_GET[$m[1]]) && is_scalar($_GET[$m[1]]) ? sanitize_text_field(wp_unslash($_GET[$m[1]])) : ''; }
             if ($default === '{user.email}') { $default = wp_get_current_user()->user_email; }
-            if ($extension = Extensions::field($type)) { $extension->enqueueAssets(); $html .= $extension->render($field, $inputName, $id); }
+            if ($type === 'recaptcha') {
+                $siteKey = Recaptcha::siteKey();
+                $theme = ($field['extension']['theme'] ?? '') === 'dark' ? 'dark' : 'light';
+                $size = ($field['extension']['size'] ?? '') === 'compact' ? 'compact' : 'normal';
+                $html .= '<div id="' . esc_attr($id) . '" class="gpf-recaptcha" role="group" aria-label="' . esc_attr($field['label']) . '" data-sitekey="' . esc_attr($siteKey) . '" data-theme="' . esc_attr($theme) . '" data-size="' . esc_attr($size) . '" tabindex="-1"></div><input type="hidden" name="' . esc_attr($inputName) . '">';
+                if ($siteKey === '') { $html .= '<p class="gpf-recaptcha-config">reCAPTCHA needs a site key in GitPress Forms Global Settings.</p>'; }
+            }
+            elseif ($extension = Extensions::field($type)) { $extension->enqueueAssets(); $html .= $extension->render($field, $inputName, $id); }
             elseif ($type === 'richtext') {
                 $html .= '<div class="gpf-rich-toolbar" role="toolbar" aria-label="Text formatting"><button type="button" data-format="bold" aria-label="Bold"><strong>B</strong></button><button type="button" data-format="italic" aria-label="Italic"><em>I</em></button><button type="button" data-format="insertUnorderedList" aria-label="Bullet list">List</button><button type="button" data-format="removeFormat">Clear formatting</button></div><div id="' . esc_attr($id) . '" class="gpf-rich-editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="' . esc_attr($field['label']) . '">' . wp_kses_post($default) . '</div><textarea name="' . esc_attr($inputName) . '" hidden>' . esc_textarea($default) . '</textarea>';
             }

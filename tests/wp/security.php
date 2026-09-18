@@ -2,7 +2,7 @@
 $sandbox = dirname(__DIR__, 2) . '/.runtime/wordpress';
 if (!is_file($sandbox . '/.gitpress-test-sandbox')) { throw new RuntimeException('Missing isolated test sandbox.'); }
 require $sandbox . '/wp-load.php';
-use GitPress\Forms\{Database, Definition, Repository, Security, Validation};
+use GitPress\Forms\{Database, Definition, Recaptcha, Repository, Security, Validation};
 $passed = 0;
 function verify($value, $message): void { global $passed; if (!$value) { throw new RuntimeException('FAIL: ' . $message); } $passed++; echo 'PASS: ' . $message . "\n"; }
 function request($method, $path, $body = null) { $r = new WP_REST_Request($method, '/gitpress-forms/v1/' . $path); if ($body !== null) { $r->set_header('content-type', 'application/json'); $r->set_body(wp_json_encode($body)); } return rest_get_server()->dispatch($r); }
@@ -41,6 +41,18 @@ Database::transaction(static function () use (&$callbacks) {
 verify($callbacks === ['outer'], 'Rolled-back nested callbacks never execute');
 $plain = 'credential-' . wp_generate_uuid4(); $cipher = Security::encrypt($plain);
 verify(!str_contains($cipher, $plain) && Security::decrypt($cipher) === $plain, 'Credentials encrypt and decrypt correctly');
+$siteKey = 'test-site-key-' . str_repeat('a', 24); $secretKey = 'test-secret-key-' . str_repeat('b', 24);
+$settings = request('PUT', 'settings', ['deleteOnUninstall' => false, 'recaptchaSiteKey' => $siteKey, 'recaptchaSecret' => $secretKey])->get_data();
+verify($settings['recaptchaConfigured'] && $settings['recaptchaSiteKey'] === $siteKey && !isset($settings['recaptchaSecret']), 'reCAPTCHA settings expose the site key but never the secret');
+verify(get_option('gitpress_forms_recaptcha_secret') !== $secretKey, 'reCAPTCHA secret is encrypted at rest');
+$captchaFields = [['id' => 'captcha', 'name' => 'captcha', 'type' => 'recaptcha', 'label' => 'Human check', 'required' => true, 'children' => [], 'options' => []]];
+$passFilter = static fn () => true; add_filter('gitpress_forms/recaptcha_verification', $passFilter);
+verify(Recaptcha::verify($captchaFields, ['captcha' => 'valid-test-token'], $private['id']) === [], 'reCAPTCHA accepts a server-verified token');
+remove_filter('gitpress_forms/recaptcha_verification', $passFilter);
+$failFilter = static fn () => false; add_filter('gitpress_forms/recaptcha_verification', $failFilter);
+verify(isset(Recaptcha::verify($captchaFields, ['captcha' => 'invalid-test-token'], $private['id'])['captcha']), 'reCAPTCHA rejects a failed server verification');
+remove_filter('gitpress_forms/recaptcha_verification', $failFilter);
+request('PUT', 'settings', ['deleteOnUninstall' => false, 'clearRecaptcha' => true]);
 verify(!Security::checkToken(Security::token($private['id']), $private['id'] + 1), 'Submission token is bound to its form');
 verify(!Security::lookup(str_repeat('a', 64), 'resume', $private['id']), 'Unknown resume token yields no data');
 $fields = [['id' => 'group', 'name' => 'group', 'type' => 'repeat', 'children' => [['id' => 'pw', 'name' => 'password', 'type' => 'password', 'children' => []]]]];

@@ -291,9 +291,9 @@ Run `npm run release:check` to enforce the gate. Read [current coverage and bloc
 - [ ] **integrate akismet** — `doc:security-spam/integrate-akismet` — not_implemented
 - [ ] **integrate cloudflare turnstile** — `doc:security-spam/integrate-cloudflare-turnstile` — not_implemented
 - [ ] **integrate hcaptcha** — `doc:security-spam/integrate-hcaptcha` — not_implemented
-- [ ] **integrate recaptcha** — `doc:security-spam/integrate-recaptcha` — not_implemented
-- [ ] **recaptcha field** — `doc:security-spam/recaptcha-field` — not_implemented
-- [ ] **spam protection with honeypot and google recaptcha** — `doc:security-spam/spam-protection-with-honeypot-and-google-recaptcha` — not_implemented
+- [ ] **integrate recaptcha** — `doc:security-spam/integrate-recaptcha` — partial; evidence: docs/VERIFICATION.md — v2 Checkbox keys, rendering, and server verification exercised; v3 coverage remains
+- [ ] **recaptcha field** — `doc:security-spam/recaptcha-field` — partial; evidence: docs/VERIFICATION.md — v2 Checkbox field, theme and size controls exercised
+- [ ] **spam protection with honeypot and google recaptcha** — `doc:security-spam/spam-protection-with-honeypot-and-google-recaptcha` — partial; evidence: docs/SECURITY.md — honeypot and v2 Checkbox implemented; broader anti-spam coverage remains
 
 ## native-connectors
 
@@ -490,7 +490,7 @@ Run `npm run release:check` to enforce the gate. Read [current coverage and bloc
 - [ ] **form step** — `field:form_step` — partial; docs/STATUS.md — implemented subset and remaining limitations
 - [ ] **terms and condition** — `field:terms_and_condition` — partial; docs/STATUS.md — implemented subset and remaining limitations
 - [ ] **gdpr agreement** — `field:gdpr_agreement` — partial; docs/STATUS.md — implemented subset and remaining limitations
-- [ ] **recaptcha** — `field:recaptcha` — partial; docs/STATUS.md — implemented subset and remaining limitations
+- [ ] **recaptcha** — `field:recaptcha` — partial; docs/VERIFICATION.md — v2 Checkbox field verified; other reference modes remain
 - [ ] **hcaptcha** — `field:hcaptcha` — partial; docs/STATUS.md — implemented subset and remaining limitations
 - [ ] **turnstile** — `field:turnstile` — partial; docs/STATUS.md — implemented subset and remaining limitations
 - [ ] **shortcode** — `field:shortcode` — partial; docs/STATUS.md — implemented subset and remaining limitations
