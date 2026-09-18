@@ -47,4 +47,6 @@ The release gate intentionally fails. Remaining implementation, provider access 
 
 The development ZIP was extracted into a separate plugin directory on the isolated WordPress 6.6/MySQL site. Builder/public submission and private entry/PDF scenarios passed using those packaged PHP files, Composer dependencies and browser assets. Deactivation preserved forms. The default uninstall preserved forms. A separate explicit-deletion uninstall removed plugin tables and role capabilities. Run the two lifecycle cases in separate PHP processes because WordPress includes uninstall.php only once per process.
 
+The canonical `gitpress-forms.zip` installer was also uploaded through WordPress's Plugins → Add New → Upload Plugin screen, installed, and activated successfully on PHP 8.2. The GitHub source download and the `-source.zip` development archive are not WordPress installers.
+
 Archive paths are checked for private runtime directories, environment files, test credential files and node_modules. Two consecutive package runs with unchanged inputs must produce identical SHA-256 hashes. Stable version packaging rejects an incomplete acceptance checklist.

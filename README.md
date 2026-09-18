@@ -13,7 +13,9 @@ Independent WordPress form builder for the GitPress ecosystem. Original PHP and 
 
 ## Install the preview
 
-1. Build or obtain `dist/gitpress-forms-0.1.0-dev.zip`.
+Download the `gitpress-forms.zip` asset from the GitHub release. Do not upload GitHub's **Source code (zip)** download or the `-source.zip` archive; those contain editable source and intentionally omit generated browser assets and Composer dependencies.
+
+1. Build or obtain `dist/gitpress-forms.zip`.
 2. On a test site, open Plugins → Add New → Upload Plugin, upload the ZIP, and activate it.
 3. Open GitPress Forms, create a form, choose Published, and save.
 4. Embed `[gitpress_form id="123"]` or use the GitPress Form block.
@@ -36,7 +38,7 @@ npm run build
 npm run package
 ```
 
-Set `GPF_PHP` to your PHP executable if it is not on PATH. The Windows helper can also locate Local's PHP runtime. Packaging includes Composer dependencies, browser bundles, examples and documentation. An additional source ZIP includes the editable project and lockfiles. ZIP entries use fixed timestamps and sorted paths.
+Set `GPF_PHP` to your PHP executable if it is not on PATH. The Windows helper can also locate Local's PHP runtime. The canonical WordPress installer is always `dist/gitpress-forms.zip`; it includes Composer dependencies and browser bundles. An additional source ZIP contains the editable project and lockfiles and is not installable. ZIP entries use fixed timestamps and sorted paths.
 
 ```sh
 npm run release:check

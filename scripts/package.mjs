@@ -1,5 +1,5 @@
 import archiver from 'archiver';
-import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { createWriteStream, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 const { version } = JSON.parse(await readFile('package.json', 'utf8'));
@@ -16,18 +16,23 @@ async function walk(path) {
   if (!info.isDirectory()) return [path];
   const entries = await readdir(path); return (await Promise.all(entries.sort().map(name=>walk(`${path}/${name}`)))).flat();
 }
-async function zip(name, paths) {
+async function zip(name, paths, include = () => true) {
   const archive = archiver('zip', { zlib: { level: 9 }, statConcurrency: 1 }); const output = createWriteStream(name);
   const done = new Promise((resolve,reject)=>{output.on('close',resolve);archive.on('error',reject);output.on('error',reject);});
   archive.pipe(output);
-  const files = (await Promise.all(paths.filter(existsSync).map(walk))).flat().sort();
+  const files = (await Promise.all(paths.filter(existsSync).map(walk))).flat().filter(include).sort();
   for (const file of files) archive.file(file, { name: `gitpress-forms/${file}`, date: new Date('2026-01-01T00:00:00Z'), mode: 0o644 });
   await archive.finalize(); await done;
   const sha = createHash('sha256').update(await readFile(name)).digest('hex'); console.log(`${name} (${archive.pointer()} bytes)`); return `${sha}  ${name.split('/').at(-1)}`;
 }
 const shared = ['includes','schema','examples','docs','gitpress-forms.php','uninstall.php','README.md','LICENSE','composer.json','composer.lock'];
 const hashes = [];
-hashes.push(await zip(`dist/gitpress-forms-${version}.zip`, [...shared,'build','vendor']));
+const installer = `dist/gitpress-forms-${version}.zip`;
+hashes.push(await zip(installer, ['includes','schema','gitpress-forms.php','uninstall.php','README.md','LICENSE','build','vendor'], file => !file.endsWith('.map')));
+await copyFile(installer, 'dist/gitpress-forms.zip');
+const canonicalSha = createHash('sha256').update(await readFile('dist/gitpress-forms.zip')).digest('hex');
+hashes.push(`${canonicalSha}  gitpress-forms.zip`);
 hashes.push(await zip(`dist/gitpress-forms-${version}-source.zip`, [...shared,'src','scripts','tests','package.json','package-lock.json','tsconfig.json','playwright.config.ts','.gitignore']));
 await writeFile(`dist/SHA256SUMS.txt`, hashes.join('\n')+'\n');
+console.log('Upload dist/gitpress-forms.zip in WordPress. The source archive is not installable.');
 console.log('Development preview archives do not satisfy the complete parity release gate.');
