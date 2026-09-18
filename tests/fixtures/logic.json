@@ -1,0 +1,21 @@
+{
+  "calculations": [
+    { "formula": "2 + 3 * 4", "values": {}, "expected": 14 },
+    { "formula": "(2 + 3) * 4", "values": {}, "expected": 20 },
+    { "formula": "round({quantity} * {price} * (1 - {discount}/100), 2)", "values": { "quantity": 3, "price": 19.95, "discount": 10 }, "expected": 53.87 },
+    { "formula": "max(0, min({age}, 100))", "values": { "age": -3 }, "expected": 0 },
+    { "formula": "sum(1,2,3)+abs(-4)", "values": {}, "expected": 10 },
+    { "formula": "2^3^2", "values": {}, "expected": 512 },
+    { "formula": "round(-1.5)", "values": {}, "expected": -2 },
+    { "formula": "{missing}+2", "values": {}, "expected": 2 },
+    { "formula": "{large}/100", "values": { "large": 1e20 }, "expected": 1e18 },
+    { "formula": "5.5 % 2", "values": {}, "expected": 1.5 }
+  ],
+  "invalid": ["1/0", "1%0", "alert(1)", "Math.random()", "(2+3", "2+", "2;system(1)", "2**3", "{quantity}+1"],
+  "conditions": [
+    { "rule": { "mode": "all", "rules": [{ "field": "a", "operator": "eq", "value": "yes" }, { "field": "n", "operator": "gte", "value": "3" }] }, "values": { "a": "yes", "n": "3" }, "expected": true },
+    { "rule": { "mode": "any", "rules": [{ "field": "a", "operator": "eq", "value": "yes" }, { "field": "n", "operator": "gt", "value": "3" }] }, "values": { "a": "no", "n": "3" }, "expected": false },
+    { "rule": { "mode": "all", "rules": [{ "field": "choice", "operator": "eq", "value": "b" }] }, "values": { "choice": ["a", "b"] }, "expected": true },
+    { "rule": { "mode": "all", "rules": [{ "field": "absent", "operator": "empty", "value": "" }] }, "values": {}, "expected": true }
+  ]
+}

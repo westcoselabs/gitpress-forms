@@ -1,0 +1,224 @@
+[
+  {
+    "type": "text",
+    "label": "Simple Text",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "textarea",
+    "label": "Text Area",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "name",
+    "label": "Name",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "email",
+    "label": "Email Address",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "number",
+    "label": "Numeric Field",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "phone",
+    "label": "Phone / Mobile",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "address",
+    "label": "Address",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "url",
+    "label": "Website URL",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "mask",
+    "label": "Mask Input",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "select",
+    "label": "Dropdown",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "radio",
+    "label": "Radio",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "checkbox",
+    "label": "Checkbox",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "multiselect",
+    "label": "Multiple Choice",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "country",
+    "label": "Country List",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "date",
+    "label": "Time & Date",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "file",
+    "label": "File Upload",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "image",
+    "label": "Image Upload",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "html",
+    "label": "Custom HTML",
+    "group": "General",
+    "container": false
+  },
+  {
+    "type": "hidden",
+    "label": "Hidden Field",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "password",
+    "label": "Password",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "terms",
+    "label": "Terms & Conditions",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "gdpr",
+    "label": "GDPR Agreement",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "rating",
+    "label": "Ratings",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "nps",
+    "label": "Net Promoter Score",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "slider",
+    "label": "Range Slider",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "color",
+    "label": "Color Picker",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "calculation",
+    "label": "Numeric Calculation",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "richtext",
+    "label": "Rich Text Input",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "signature",
+    "label": "Signature",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "grid",
+    "label": "Checkable Grid",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "ranking",
+    "label": "Ranking",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "section",
+    "label": "Section Break",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "shortcode",
+    "label": "Shortcode",
+    "group": "Advanced",
+    "container": false
+  },
+  {
+    "type": "repeat",
+    "label": "Repeat Container",
+    "group": "Layout",
+    "container": true
+  },
+  {
+    "type": "container",
+    "label": "Column Container",
+    "group": "Layout",
+    "container": true
+  },
+  {
+    "type": "step",
+    "label": "Form Step",
+    "group": "Layout",
+    "container": true
+  },
+  {
+    "type": "accordion",
+    "label": "Accordion / Tab",
+    "group": "Layout",
+    "container": true
+  }
+]

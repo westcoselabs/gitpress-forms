@@ -1,0 +1,746 @@
+{
+  "source": "gitpress-examples-v1",
+  "forms": [
+    {
+      "id": "contact",
+      "title": "Contact Form",
+      "definition": {
+        "schemaVersion": 1,
+        "fields": [
+          {
+            "id": "name_0",
+            "name": "name_0",
+            "type": "name",
+            "label": "Name",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "email_1",
+            "name": "email_1",
+            "type": "email",
+            "label": "Email Address",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "textarea_2",
+            "name": "textarea_2",
+            "type": "textarea",
+            "label": "Text Area",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          }
+        ],
+        "settings": {
+          "submitLabel": "Submit Form",
+          "confirmation": "Thank you! Your submission has been received.",
+          "redirect": "",
+          "requireLogin": false,
+          "maxEntries": 0,
+          "opensAt": "",
+          "closesAt": "",
+          "approval": false,
+          "doubleOptin": false,
+          "saveResume": false,
+          "mode": "standard",
+          "retentionDays": 0,
+          "notifications": [],
+          "confirmations": [],
+          "css": "",
+          "js": ""
+        },
+        "style": {
+          "primary": "#3865e9",
+          "text": "#263348",
+          "background": "#ffffff",
+          "border": "#dce1eb",
+          "radius": 6,
+          "gap": 20,
+          "fontSize": 15,
+          "maxWidth": 780,
+          "labelPosition": "top"
+        }
+      },
+      "status": "draft"
+    },
+    {
+      "id": "quote",
+      "title": "Request a Quote",
+      "definition": {
+        "schemaVersion": 1,
+        "fields": [
+          {
+            "id": "name_0",
+            "name": "name_0",
+            "type": "name",
+            "label": "Name",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "email_1",
+            "name": "email_1",
+            "type": "email",
+            "label": "Email Address",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "phone_2",
+            "name": "phone_2",
+            "type": "phone",
+            "label": "Phone / Mobile",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "select_3",
+            "name": "select_3",
+            "type": "select",
+            "label": "Dropdown",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "textarea_4",
+            "name": "textarea_4",
+            "type": "textarea",
+            "label": "Text Area",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          }
+        ],
+        "settings": {
+          "submitLabel": "Submit Form",
+          "confirmation": "Thank you! Your submission has been received.",
+          "redirect": "",
+          "requireLogin": false,
+          "maxEntries": 0,
+          "opensAt": "",
+          "closesAt": "",
+          "approval": false,
+          "doubleOptin": false,
+          "saveResume": false,
+          "mode": "standard",
+          "retentionDays": 0,
+          "notifications": [],
+          "confirmations": [],
+          "css": "",
+          "js": ""
+        },
+        "style": {
+          "primary": "#3865e9",
+          "text": "#263348",
+          "background": "#ffffff",
+          "border": "#dce1eb",
+          "radius": 6,
+          "gap": 20,
+          "fontSize": 15,
+          "maxWidth": 780,
+          "labelPosition": "top"
+        }
+      },
+      "status": "draft"
+    },
+    {
+      "id": "event",
+      "title": "Event Registration",
+      "definition": {
+        "schemaVersion": 1,
+        "fields": [
+          {
+            "id": "name_0",
+            "name": "name_0",
+            "type": "name",
+            "label": "Name",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "email_1",
+            "name": "email_1",
+            "type": "email",
+            "label": "Email Address",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "number_2",
+            "name": "number_2",
+            "type": "number",
+            "label": "Numeric Field",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "terms_3",
+            "name": "terms_3",
+            "type": "terms",
+            "label": "Terms & Conditions",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          }
+        ],
+        "settings": {
+          "submitLabel": "Submit Form",
+          "confirmation": "Thank you! Your submission has been received.",
+          "redirect": "",
+          "requireLogin": false,
+          "maxEntries": 0,
+          "opensAt": "",
+          "closesAt": "",
+          "approval": false,
+          "doubleOptin": false,
+          "saveResume": false,
+          "mode": "standard",
+          "retentionDays": 0,
+          "notifications": [],
+          "confirmations": [],
+          "css": "",
+          "js": ""
+        },
+        "style": {
+          "primary": "#3865e9",
+          "text": "#263348",
+          "background": "#ffffff",
+          "border": "#dce1eb",
+          "radius": 6,
+          "gap": 20,
+          "fontSize": 15,
+          "maxWidth": 780,
+          "labelPosition": "top"
+        }
+      },
+      "status": "draft"
+    },
+    {
+      "id": "survey",
+      "title": "Customer Feedback",
+      "definition": {
+        "schemaVersion": 1,
+        "fields": [
+          {
+            "id": "email_0",
+            "name": "email_0",
+            "type": "email",
+            "label": "Email Address",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "rating_1",
+            "name": "rating_1",
+            "type": "rating",
+            "label": "Ratings",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "nps_2",
+            "name": "nps_2",
+            "type": "nps",
+            "label": "Net Promoter Score",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "textarea_3",
+            "name": "textarea_3",
+            "type": "textarea",
+            "label": "Text Area",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          }
+        ],
+        "settings": {
+          "submitLabel": "Submit Form",
+          "confirmation": "Thank you! Your submission has been received.",
+          "redirect": "",
+          "requireLogin": false,
+          "maxEntries": 0,
+          "opensAt": "",
+          "closesAt": "",
+          "approval": false,
+          "doubleOptin": false,
+          "saveResume": false,
+          "mode": "standard",
+          "retentionDays": 0,
+          "notifications": [],
+          "confirmations": [],
+          "css": "",
+          "js": ""
+        },
+        "style": {
+          "primary": "#3865e9",
+          "text": "#263348",
+          "background": "#ffffff",
+          "border": "#dce1eb",
+          "radius": 6,
+          "gap": 20,
+          "fontSize": 15,
+          "maxWidth": 780,
+          "labelPosition": "top"
+        }
+      },
+      "status": "draft"
+    },
+    {
+      "id": "application",
+      "title": "Job Application",
+      "definition": {
+        "schemaVersion": 1,
+        "fields": [
+          {
+            "id": "name_0",
+            "name": "name_0",
+            "type": "name",
+            "label": "Name",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "email_1",
+            "name": "email_1",
+            "type": "email",
+            "label": "Email Address",
+            "required": true,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "phone_2",
+            "name": "phone_2",
+            "type": "phone",
+            "label": "Phone / Mobile",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "file_3",
+            "name": "file_3",
+            "type": "file",
+            "label": "File Upload",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          },
+          {
+            "id": "textarea_4",
+            "name": "textarea_4",
+            "type": "textarea",
+            "label": "Text Area",
+            "required": false,
+            "placeholder": "",
+            "help": "",
+            "default": "",
+            "width": 12,
+            "options": [
+              {
+                "label": "First Choice",
+                "value": "option_1"
+              },
+              {
+                "label": "Second Choice",
+                "value": "option_2"
+              },
+              {
+                "label": "Third Choice",
+                "value": "option_3"
+              }
+            ],
+            "children": []
+          }
+        ],
+        "settings": {
+          "submitLabel": "Submit Form",
+          "confirmation": "Thank you! Your submission has been received.",
+          "redirect": "",
+          "requireLogin": false,
+          "maxEntries": 0,
+          "opensAt": "",
+          "closesAt": "",
+          "approval": false,
+          "doubleOptin": false,
+          "saveResume": false,
+          "mode": "standard",
+          "retentionDays": 0,
+          "notifications": [],
+          "confirmations": [],
+          "css": "",
+          "js": ""
+        },
+        "style": {
+          "primary": "#3865e9",
+          "text": "#263348",
+          "background": "#ffffff",
+          "border": "#dce1eb",
+          "radius": 6,
+          "gap": 20,
+          "fontSize": 15,
+          "maxWidth": 780,
+          "labelPosition": "top"
+        }
+      },
+      "status": "draft"
+    }
+  ]
+}

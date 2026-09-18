@@ -1,0 +1,5 @@
+import { emptyDefinition, makeField } from '../src/shared/definition';
+import { mkdir, writeFile } from 'node:fs/promises';
+const templates = [{id:'contact',title:'Contact Form',fields:['name','email','textarea']},{id:'quote',title:'Request a Quote',fields:['name','email','phone','select','textarea']},{id:'event',title:'Event Registration',fields:['name','email','number','terms']},{id:'survey',title:'Customer Feedback',fields:['email','rating','nps','textarea']},{id:'application',title:'Job Application',fields:['name','email','phone','file','textarea']}];
+const forms = templates.map(template => { const definition = emptyDefinition(); definition.fields = template.fields.map((type,index) => ({...makeField(type),id:`${type}_${index}`,name:`${type}_${index}`,required:['email','name'].includes(type)})); return {id:template.id,title:template.title,definition,status:'draft'}; });
+await mkdir('examples',{recursive:true}); await writeFile('examples/starter-forms.json', JSON.stringify({source:'gitpress-examples-v1',forms},null,2)+'\n');

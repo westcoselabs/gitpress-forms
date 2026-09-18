@@ -1,0 +1,9 @@
+{
+  "landingPage": "/wp-admin/admin.php?page=gitpress-forms",
+  "steps": [
+    {"step":"activatePlugin","pluginPath":"gitpress-forms/gitpress-forms.php"},
+    {"step":"runPHP","code":"<?php require '/wordpress/wp-load.php'; if (!username_exists('gpf_admin')) wp_insert_user(['user_login'=>'gpf_admin','user_pass'=>'gitpress-test-only','user_email'=>'test@example.test','role'=>'administrator']);"},
+    {"step":"mkdir","path":"/wordpress/wp-content/mu-plugins"},
+    {"step":"writeFile","path":"/wordpress/wp-content/mu-plugins/gpf-mail.php","data":"<?php add_filter('pre_wp_mail', static fn () => true);"}
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "landingPage": "/wp-admin/admin.php?page=gitpress-forms",
+  "login": true,
+  "steps": [{ "step": "activatePlugin", "pluginPath": "gitpress-forms/gitpress-forms.php" }]
+}

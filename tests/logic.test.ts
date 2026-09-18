@@ -1,0 +1,11 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import cases from './fixtures/logic.json';
+import { calculate, matches } from '../src/shared/logic';
+import { cloneField, makeField, removeField, updateField } from '../src/shared/definition';
+import type { Rule } from '../src/shared/types';
+for (const item of cases.calculations) test(`formula: ${item.formula}`, () => assert.equal(calculate(item.formula, item.values), item.expected));
+for (const expression of cases.invalid) test(`reject unsafe/invalid formula: ${expression}`, () => assert.throws(() => calculate(expression, { quantity: 'not a number' })));
+for (const [index, item] of cases.conditions.entries()) test(`condition case ${index}`, () => assert.equal(matches(item.rule as Rule, item.values), item.expected));
+test('nested duplication changes every field identifier and keeps the original independent', () => { const parent = makeField('container'); parent.children = [makeField('text')]; const copy = cloneField(parent); assert.notEqual(copy.id, parent.id); assert.notEqual(copy.children[0].name, parent.children[0].name); copy.children[0].label = 'Changed'; assert.notEqual(parent.children[0].label, 'Changed'); });
+test('field updates and deletes reach nested layouts without affecting siblings', () => { const parent = makeField('container'), first = makeField('text'), second = makeField('email'); parent.children = [first, second]; const result = updateField([parent], first.id, f => ({ ...f, label: 'Updated' })); assert.equal(result[0].children[0].label, 'Updated'); assert.equal(result[0].children[1].label, second.label); assert.equal(removeField(result, first.id)[0].children.length, 1); });

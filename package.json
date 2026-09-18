@@ -1,0 +1,43 @@
+{
+  "name": "gitpress-forms",
+  "version": "0.1.0-dev",
+  "private": true,
+  "type": "module",
+  "description": "Independent WordPress form builder for the GitPress ecosystem.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:php": "node scripts/php.mjs tests/domain.php",
+    "lint:php": "node scripts/php.mjs --lint",
+    "test:e2e": "playwright test",
+    "dev:native": "node scripts/native-server.mjs",
+    "dev:wordpress": "wp-playground-cli server --auto-mount --port=9400 --php=8.2 --blueprint=tests/blueprint.json",
+    "package": "node scripts/package.mjs",
+    "release:check": "node scripts/release-check.mjs"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "lucide-react": "^0.468.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@wp-playground/cli": "3.1.54",
+    "archiver": "^7.0.1",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "overrides": {
+    "qs": "^6.16.0"
+  }
+}

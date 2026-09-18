@@ -1,0 +1,43 @@
+.gpf-admin .search-box input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=file]) { border:0; background:transparent; padding:4px; min-height:30px; }
+.gpf-admin .builder-title input:not([type=checkbox]):not([type=radio]):not([type=color]):not([type=file]) { border-color:transparent; background:transparent; padding:0 4px; font-size:20px; font-weight:600; }
+.gpf-admin .builder-title input:hover { border-color:#dce2ec; }
+.gpf-admin .palette-grid button { touch-action:none; }
+.gpf-admin .palette-grid button[aria-pressed=true] { opacity:.5; }
+.gpf-admin .preview-ranking { margin:0; padding-left:25px; }
+.gpf-admin .preview-ranking li { padding:5px; border-bottom:1px solid var(--line); }
+.gpf-admin .preview-scores { display:flex; gap:8px; color:#a6b2c6; font-size:21px; }
+
+/* Original styling measured against the 6.2.13 editor at desktop width. */
+.gpf-admin { --primary:#1b7dfb; --muted:#5d6a7d; --ink:#253247; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+.gpf-admin:has(.builder-heading) > .app-header { display:none; }
+.gpf-admin .builder-heading { padding:16px 24px; }
+.gpf-admin .builder-workspace { grid-template-columns:minmax(0,3fr) minmax(360px,2fr); min-height:calc(100vh - 180px); }
+.gpf-admin .builder-canvas-area { background:white; padding:0 14px 24px; }
+.gpf-admin .canvas-paper { padding:8px 0 24px; border:0; border-radius:0; box-shadow:none; }
+.gpf-admin .canvas-toolbar { height:45px; }
+.gpf-admin .canvas-field { padding:18px 10px 12px; }
+.gpf-admin .field-preview > label { font-size:14px; font-weight:400; margin-bottom:12px; color:#3c4758; }
+.gpf-admin .field-preview input,.gpf-admin .field-preview textarea,.gpf-admin .field-preview select { font-size:13px; min-height:40px; }
+.gpf-admin .field-preview textarea { min-height:96px; }
+.gpf-admin .field-palette { background:#f1f1f1; }
+.gpf-admin .builder-sidebar { background:#f1f1f1; }
+.gpf-admin .customization { background:#fff; }
+.gpf-admin .field-palette .setting-section { background:white; border:0; border-radius:9px; padding:0 16px 16px; margin-bottom:20px; }
+.gpf-admin .field-palette .setting-section > summary { font-size:14px; font-weight:500; padding:14px 4px; color:var(--primary); }
+.gpf-admin .palette-grid { grid-template-columns:1fr; gap:7px; }
+.gpf-admin .palette-grid button { font-size:13px; min-height:46px; padding:11px 15px; color:#27364a; border-color:#dadde2; border-radius:7px; }
+.gpf-admin .palette-grid button > span { font-size:13px; }
+.gpf-admin .builder-workspace { height:calc(100vh - 180px); min-height:600px; }
+.gpf-admin .builder-sidebar,.gpf-admin .builder-canvas-area { overflow:auto; }
+.gpf-admin .sidebar-tabs { top:0; }
+.gpf-admin .palette-icon { font-size:18px; color:#24374c; width:24px; }
+.gpf-admin .sidebar-tabs button { font-size:13px; padding:10px 7px; color:#344054; }
+.gpf-admin .sidebar-tabs button.active { color:var(--primary); }
+.gpf-admin .sidebar-tabs button svg { display:none; }
+.gpf-admin .field-palette > .search-box { height:44px; }
+.gpf-admin .field-palette .search-box input { font-size:13px!important; }
+.gpf-admin .canvas-hint,.gpf-admin small,.gpf-admin .setting small { color:#65758b; }
+.gpf-admin .canvas-field:focus-visible { outline:2px solid var(--primary); outline-offset:2px; }
+@media(min-width:1500px) { .gpf-admin .palette-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:950px) and (min-width:681px) { .gpf-admin .builder-workspace { grid-template-columns:minmax(0,1fr) 300px; } .gpf-admin .sidebar-tabs button { font-size:11px; } }
+@media(max-width:680px) { .gpf-admin .builder-workspace { display:flex; height:auto; } .gpf-admin .palette-grid { grid-template-columns:1fr 1fr; } }
